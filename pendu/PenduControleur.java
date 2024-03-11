@@ -12,23 +12,6 @@ import java.util.List;
 public class PenduControleur {
 
     /**
-     * Lis un fichier passé en paramètres et renvoi son nombre de lignes
-     * @param reader : buffer du fichier lu
-     * @return le nombre de lignes
-     */
-    private static int getNbLignes(BufferedReader reader) {
-        int nbLigne = 0;
-        try {
-            while(reader.readLine() != null) {
-                nbLigne++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return nbLigne;
-    }
-
-    /**
      * Parcours un fichier et place dans une liste toutes les lignes
      */
     private static List<String> lectureFichier(String path) {
