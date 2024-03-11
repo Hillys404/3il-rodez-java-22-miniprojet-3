@@ -1,8 +1,12 @@
 package pendu;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import static pendu.PenduControleur.verificationProposition;
 
 /**
  * Crée l'interface du jeu du pendu
@@ -10,9 +14,11 @@ import javax.swing.*;
 public class PenduVue extends JPanel {
 
     private PenduModel model;
+    private PenduControleur penduControleur;
     private JTextArea textArea;
     private JButton btnSoumettreMot;
     private BorderLayout borderLayout;
+    private JLabel imageLabel;
 
     /**
      * Construction d'un objet PenduVue
@@ -25,6 +31,9 @@ public class PenduVue extends JPanel {
         creerBoutonSoumissionMot();
         creerZoneSaisie();
 
+        imageLabel = new JLabel();
+        setLayout(borderLayout);
+        add(imageLabel, borderLayout.NORTH);
     }
 
     /**
@@ -62,5 +71,34 @@ public class PenduVue extends JPanel {
         btnSoumettreMot = new JButton("Soumettre le mot");
         setLayout(borderLayout);
         add(btnSoumettreMot, BorderLayout.SOUTH);
+
+        btnSoumettreMot.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verifierMot();
+            }
+        });
+    }
+
+    /**
+     * Récupère le mot saisie par le joueur et vérifie qu'il est égal au mot tiré
+     */
+    protected void verifierMot() {
+        String motPropose = textArea.getText();
+        boolean isMotEgal = verificationProposition(motPropose);
+        if (!isMotEgal) {
+            // Affichage pendu
+            afficherImagePendu();
+        } else {
+            // Fin de la partie
+        }
+    }
+
+    /**
+     * Affichage d'un bonhomme bâton pour illustrer le pendu
+     */
+    private void afficherImagePendu() {
+        ImageIcon imagePendu = new ImageIcon("bonhomme1.jpg");
+        imageLabel.setIcon(imagePendu);
     }
 }

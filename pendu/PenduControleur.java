@@ -7,6 +7,9 @@ public class PenduControleur {
     private PenduModel model;
     private PenduVue vue;
     private JButton btnLancementPartie;
+    private JButton btnSoumettreMot;
+    private static String motTire;
+    private PenduControleur penduControleur;
 
     /**
      * Construction du controleur du jeu du pendu
@@ -19,6 +22,12 @@ public class PenduControleur {
         this.vue = vue;
         this.btnLancementPartie = btnLancementPartie;
         this.btnLancementPartie.addActionListener(e -> lancerPartie());
+        this.btnSoumettreMot = new JButton("Soumettre le mot");
+        this.btnSoumettreMot.addActionListener(e -> vue.verifierMot());
+    }
+
+    public void setPenduControleur(PenduControleur penduControleur) {
+        this.penduControleur = penduControleur;
     }
 
     /**
@@ -26,7 +35,7 @@ public class PenduControleur {
      * Et affichage d'un champ de saisie avec la première lettre du mot
      */
     private void lancerPartie() {
-        String motTire = PenduModel.getMotAleatoire("mots.txt");
+        motTire = PenduModel.getMotAleatoire("mots.txt");
 
         // Gestion de la difficulte
         // Si facile : definition et pas de timer
@@ -38,11 +47,10 @@ public class PenduControleur {
 
     /**
      * Compare le mot donné par le joueur et le mot tiré
-     * @param motTire mot choisi aléatoirement
      * @param motPropose mot proposé par le joueur
      * @return true si les mots sont les mêmes, false sinon
      */
-    private boolean verificationProposition(String motTire, String motPropose) {
+    public static boolean verificationProposition(String motPropose) {
         return motTire.equals(motPropose);
     }
 
