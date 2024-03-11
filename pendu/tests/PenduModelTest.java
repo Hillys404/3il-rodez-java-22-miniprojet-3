@@ -1,10 +1,8 @@
 package pendu.tests;
 
-import pendu.PenduControleur;
+import static pendu.PenduModel.getMotAleatoire;
 
-import static pendu.PenduControleur.getMotAleatoire;
-
-public class PenduControleurTest {
+public class PenduModelTest {
 
     public static void main(String[] args) {
 
