@@ -3,7 +3,9 @@ Ce que j'ai fait :
 - création interface avec bouton de lancement de partie
 - bouton pour soumettre un mot (pas eu le temps de faire un pendu lettre par lettre)
 - affichage de la vie du joueur
-- vérification du mot et gestion des vies
+- vérification du mot
+- gestion des vies
+- ajout messages de défaite ou victoire
 - J'ai commenté mon code
 
 Difficultés rencontrées : 

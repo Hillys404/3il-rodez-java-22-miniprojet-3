@@ -81,14 +81,13 @@ public class PenduVue extends JPanel {
      */
     protected void verifierMot() {
         String motPropose = textArea.getText();
-        boolean isMotEgal = verificationProposition(motPropose);
-        if (!isMotEgal) {
+        boolean areMotsEgaux = verificationProposition(motPropose);
+        if (!areMotsEgaux) {
             afficherImagePendu();
             afficherPerteVie();
         } else {
             // Fin de la partie
             afficherVictoire();
-            System.out.println("YOUHOUUUUUUUUUUUU");
         }
     }
 
