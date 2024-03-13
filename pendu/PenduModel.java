@@ -65,4 +65,13 @@ public class PenduModel {
         }
         return ligne;
     }
+
+    /**
+     * Récupère le nombre de lettres dans le mot tiré aléatoirement
+     * @param mot
+     * @return
+     */
+    public static int getNbLettres(String mot) {
+        return mot.length();
+    }
 }

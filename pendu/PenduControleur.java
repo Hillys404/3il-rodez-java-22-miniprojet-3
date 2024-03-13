@@ -11,7 +11,6 @@ public class PenduControleur {
     private static String motTire;
     private static String ligne;
     private static String definition;
-    private PenduControleur penduControleur;
 
     /**
      * Construction du controleur du jeu du pendu
@@ -28,10 +27,6 @@ public class PenduControleur {
         this.btnSoumettreMot.addActionListener(e -> vue.verifierMot());
     }
 
-    public void setPenduControleur(PenduControleur penduControleur) {
-        this.penduControleur = penduControleur;
-    }
-
     /**
      * Lancement d'une partie de pendu avec tirage d'un mot aléatoire
      * Et affichage d'un champ de saisie avec la première lettre du mot
@@ -41,10 +36,11 @@ public class PenduControleur {
         definition = PenduModel.getDefinition(ligne);
         motTire = PenduModel.getMot(ligne);
 
-        // afficher coeurs
+        // Affichage des vies du joueur
         vue.afficherVie();
 
         this.vue.creerBoutonSoumissionMot();
+
         // Gestion de la difficulte
         // Si facile : definition et pas de timer
         // Si difficile : l'inverse
@@ -72,7 +68,19 @@ public class PenduControleur {
         vue.afficherTexte(String.valueOf(lettre));
     }
 
+    /**
+     * Affichage de la définition sur l'interface
+     * @param definition définition du mot
+     */
     private void creationZoneDefinition(String definition) {
         vue.afficherDefinition(definition);
+    }
+
+    /**
+     * Affichage du nombre de lettres du mot
+     * @param mot mot tiré aléatoirement
+     */
+    private void creationZoneNbLettres(String mot) {
+
     }
 }

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import static pendu.PenduControleur.verificationProposition;
+import static pendu.PenduModel.getNbLettres;
 
 /**
  * Crée l'interface du jeu du pendu
@@ -28,12 +29,12 @@ public class PenduVue extends JPanel {
         this.borderLayout = new BorderLayout();
         this.nbVies = 3;
         setBackground(Color.WHITE);
+        setLayout(borderLayout);
 
         creerZoneSaisie();
 
         imageLabel = new JLabel();
-        setLayout(borderLayout);
-        add(imageLabel, borderLayout.NORTH);
+        add(imageLabel, BorderLayout.NORTH);
     }
 
     /**
@@ -99,13 +100,13 @@ public class PenduVue extends JPanel {
      * affiche le mot entier
      */
     private void afficherPerteVie() {
-        int viesRestantes = nbVies - 1;
-        System.out.println(viesRestantes);
-        if (viesRestantes == 0) {
+        nbVies--;
+        System.out.println(nbVies);
+        if (nbVies == 0) {
             afficherDefaite();
             // todo affichage mot entier
         } else {
-            for (int i = 0; i <= viesRestantes; i++) {
+            for (int i = 0; i <= nbVies; i++) {
                 ImageIcon imageVie = new ImageIcon("heart.png");
                 Image image = imageVie.getImage();
                 Image imageResized = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -119,6 +120,7 @@ public class PenduVue extends JPanel {
     }
 
     protected void afficherVie() {
+        setLayout(new FlowLayout());
         for (int i = 0; i <= nbVies; i++) {
             ImageIcon imageVie = new ImageIcon("heart.png");
             Image image = imageVie.getImage();
@@ -126,8 +128,7 @@ public class PenduVue extends JPanel {
             imageVie = new ImageIcon(imageResized);
             JLabel labelVie = new JLabel();
             labelVie.setIcon(imageVie);
-            setLayout(borderLayout);
-            add(labelVie, borderLayout.NORTH);
+            add(labelVie);
         }
     }
 
@@ -136,11 +137,11 @@ public class PenduVue extends JPanel {
      */
     private void afficherDefaite() {
         JLabel labelDef = new JLabel();
-        labelDef.setText("VOUS AVEZ PERDU AHAHAH");
-        System.out.println("VOUS AVEZ PERDU AHAHAHAHAHAHAHHAHAHAHA");
+        labelDef.setText("VOUS AVEZ PERDU");
         labelDef.setFont(new Font("Arial", Font.PLAIN, 40));
-        setLayout(borderLayout);
         add(labelDef, BorderLayout.SOUTH);
+
+        // TODO retirer btn soumettre mot
     }
 
     /**
@@ -152,5 +153,12 @@ public class PenduVue extends JPanel {
         Image imageResized = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         imagePendu = new ImageIcon(imageResized);
         imageLabel.setIcon(imagePendu);
+    }
+
+    private void afficherNbLettres(String mot) {
+        JLabel labelDef = new JLabel();
+        labelDef.setText("Nombre de lettres : " + getNbLettres(mot));
+        labelDef.setFont(new Font("Arial", Font.PLAIN, 40));
+        add(labelDef, BorderLayout.SOUTH);
     }
 }
