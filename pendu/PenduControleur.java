@@ -36,7 +36,7 @@ public class PenduControleur {
      */
     private void lancerPartie() {
         motTire = PenduModel.getMotAleatoire("mots.txt");
-
+        this.vue.creerBoutonSoumissionMot();
         // Gestion de la difficulte
         // Si facile : definition et pas de timer
         // Si difficile : l'inverse

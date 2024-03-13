@@ -28,7 +28,7 @@ public class PenduVue extends JPanel {
         this.model = penduModel;
         this.borderLayout = new BorderLayout();
         setBackground(Color.WHITE);
-        creerBoutonSoumissionMot();
+
         creerZoneSaisie();
 
         imageLabel = new JLabel();
@@ -67,7 +67,7 @@ public class PenduVue extends JPanel {
     /**
      * Création du bouton pour permettre au joueur de vérifier son mot
      */
-    private void creerBoutonSoumissionMot() {
+    protected void creerBoutonSoumissionMot() {
         btnSoumettreMot = new JButton("Soumettre le mot");
         setLayout(borderLayout);
         add(btnSoumettreMot, BorderLayout.SOUTH);
@@ -95,10 +95,13 @@ public class PenduVue extends JPanel {
     }
 
     /**
-     * Affichage d'un bonhomme bâton pour illustrer le pendu
+     * Affichage d'une image pour illustrer le pendu
      */
     private void afficherImagePendu() {
         ImageIcon imagePendu = new ImageIcon("bonhomme1.jpg");
+        Image image = imagePendu.getImage();
+        Image imageResized = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        imagePendu = new ImageIcon(imageResized);
         imageLabel.setIcon(imagePendu);
     }
 }
