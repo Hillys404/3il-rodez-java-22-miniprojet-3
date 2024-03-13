@@ -1,8 +1,6 @@
 package pendu;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -178,7 +176,7 @@ public class PenduVue extends JPanel {
 
     /**
      * Affiche le nombre de lettres du mot tiré aléatoirement
-     * @param mot
+     * @param mot mot tiré
      */
     protected void afficherNbLettres(String mot) {
         JLabel labelDef = new JLabel();
