@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -28,11 +29,31 @@ public class PenduModel {
     }
 
     /**
+     * Récupère la définition du mot tiré dans la ligne du fichier
+     * @param ligne ligne dans le fichier
+     * @return la définition
+     */
+    public static String getDefinition(String ligne) {
+        String[] mots = ligne.split(" ");
+        return String.join(" ", Arrays.copyOfRange(mots, 1, mots.length));
+    }
+
+    /**
+     * Récupère le mot tiré aléatoirement dans la ligne du fichier
+     * @param ligne ligne du fichier
+     * @return le mot tiré
+     */
+    public static String getMot(String ligne) {
+        String[] mots = ligne.split(" ");
+        return mots[0];
+    }
+
+    /**
      * Récupère aléatoirement un mot dans une liste
      * @return le mot
      */
-    public static String getMotAleatoire(String path) {
-        String mot = "";
+    public static String getLigneAleatoire(String path) {
+        String ligne = "";
 
         List<String> lignes = lectureFichier(path);
         int nbLignes = lignes.size();
@@ -40,12 +61,8 @@ public class PenduModel {
         if (nbLignes > 0) {
             // Récupération d'une ligne aléatoirement
             int random = (int) (1 + (Math.random() * nbLignes));
-            String ligne = lignes.get(random - 1);
-
-            // Récupération du mot
-            String[] mots = ligne.split(" ");
-            mot = mots[0];
+            ligne = lignes.get(random - 1);
         }
-        return mot;
+        return ligne;
     }
 }

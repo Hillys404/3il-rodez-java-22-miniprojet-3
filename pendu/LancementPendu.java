@@ -14,7 +14,6 @@ public class LancementPendu {
 
         JButton btnLancementPartie = new JButton("Lancer une partie");
 
-
         PenduControleur controleur = new PenduControleur(vue, model, btnLancementPartie);
 
         JPanel panelBtn = new JPanel();

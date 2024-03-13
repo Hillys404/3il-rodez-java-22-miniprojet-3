@@ -9,6 +9,8 @@ public class PenduControleur {
     private JButton btnLancementPartie;
     private JButton btnSoumettreMot;
     private static String motTire;
+    private static String ligne;
+    private static String definition;
     private PenduControleur penduControleur;
 
     /**
@@ -35,7 +37,13 @@ public class PenduControleur {
      * Et affichage d'un champ de saisie avec la première lettre du mot
      */
     private void lancerPartie() {
-        motTire = PenduModel.getMotAleatoire("mots.txt");
+        ligne = PenduModel.getLigneAleatoire("mots.txt");
+        definition = PenduModel.getDefinition(ligne);
+        motTire = PenduModel.getMot(ligne);
+
+        // afficher coeurs
+        vue.afficherVie();
+
         this.vue.creerBoutonSoumissionMot();
         // Gestion de la difficulte
         // Si facile : definition et pas de timer
@@ -43,6 +51,7 @@ public class PenduControleur {
 
         // Apparition sur l'interface d'un champ de saisie avec la première lettre du mot
         creationZoneSaisie(motTire);
+        creationZoneDefinition(definition);
     }
 
     /**
@@ -61,5 +70,9 @@ public class PenduControleur {
     private void creationZoneSaisie(String mot) {
         char lettre = mot.charAt(0);
         vue.afficherTexte(String.valueOf(lettre));
+    }
+
+    private void creationZoneDefinition(String definition) {
+        vue.afficherDefinition(definition);
     }
 }
