@@ -29,10 +29,7 @@ public class PenduVue extends JPanel {
         this.borderLayout = new BorderLayout();
         this.nbVies = 3;
         setBackground(Color.WHITE);
-        //setLayout(borderLayout);
-
         creerZoneSaisie();
-
         imageLabel = new JLabel();
         add(imageLabel, BorderLayout.NORTH);
     }
@@ -120,6 +117,9 @@ public class PenduVue extends JPanel {
         repaint();
     }
 
+    /**
+     * Affiche les images qui correspondent à la vie restante du joueur
+     */
     protected void afficherVie() {
         setLayout(new FlowLayout());
         for (int i = 0; i < nbVies; i++) {
@@ -176,6 +176,10 @@ public class PenduVue extends JPanel {
         imageLabel.setIcon(imagePendu);
     }
 
+    /**
+     * Affiche le nombre de lettres du mot tiré aléatoirement
+     * @param mot
+     */
     protected void afficherNbLettres(String mot) {
         JLabel labelDef = new JLabel();
         labelDef.setText("Nombre de lettres : " + getNbLettres(mot));
