@@ -29,7 +29,7 @@ public class PenduVue extends JPanel {
         this.borderLayout = new BorderLayout();
         this.nbVies = 3;
         setBackground(Color.WHITE);
-        setLayout(borderLayout);
+        //setLayout(borderLayout);
 
         creerZoneSaisie();
 
@@ -54,8 +54,7 @@ public class PenduVue extends JPanel {
         JLabel labelDef = new JLabel();
         labelDef.setText(definition);
         labelDef.setFont(new Font("Arial", Font.PLAIN, 20));
-        setLayout(borderLayout);
-        add(labelDef, BorderLayout.NORTH);
+        add(labelDef);
     }
 
     /**
@@ -65,8 +64,7 @@ public class PenduVue extends JPanel {
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setFont(new Font("Arial", Font.PLAIN, 20));
-        setLayout(borderLayout);
-        add(textArea, BorderLayout.CENTER);
+        add(textArea);
     }
 
     /**
@@ -74,8 +72,7 @@ public class PenduVue extends JPanel {
      */
     protected void creerBoutonSoumissionMot() {
         btnSoumettreMot = new JButton("Soumettre le mot");
-        setLayout(borderLayout);
-        add(btnSoumettreMot, BorderLayout.SOUTH);
+        add(btnSoumettreMot);
         btnSoumettreMot.addActionListener(e -> verifierMot());
     }
 
@@ -90,8 +87,20 @@ public class PenduVue extends JPanel {
             afficherPerteVie();
         } else {
             // Fin de la partie
-            // todo affichage message de victoire
+            afficherVictoire();
             System.out.println("YOUHOUUUUUUUUUUUU");
+        }
+    }
+
+    /**
+     * Supprime les composants d'images de vies
+     */
+    private void removeAllImages() {
+        Component[] components = getComponents();
+        for (Component component : components) {
+            if (component instanceof JLabel) {
+                remove(component);
+            }
         }
     }
 
@@ -101,27 +110,20 @@ public class PenduVue extends JPanel {
      */
     private void afficherPerteVie() {
         nbVies--;
-        System.out.println(nbVies);
         if (nbVies == 0) {
             afficherDefaite();
-            // todo affichage mot entier
+            afficherMot();
         } else {
-            for (int i = 0; i <= nbVies; i++) {
-                ImageIcon imageVie = new ImageIcon("heart.png");
-                Image image = imageVie.getImage();
-                Image imageResized = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-                imageVie = new ImageIcon(imageResized);
-                JLabel labelVie = new JLabel();
-                labelVie.setIcon(imageVie);
-                setLayout(borderLayout);
-                add(labelVie, borderLayout.NORTH);
-            }
+            removeAllImages();
+            afficherVie();
         }
+        revalidate();
+        repaint();
     }
 
     protected void afficherVie() {
         setLayout(new FlowLayout());
-        for (int i = 0; i <= nbVies; i++) {
+        for (int i = 0; i < nbVies; i++) {
             ImageIcon imageVie = new ImageIcon("heart.png");
             Image image = imageVie.getImage();
             Image imageResized = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -139,9 +141,29 @@ public class PenduVue extends JPanel {
         JLabel labelDef = new JLabel();
         labelDef.setText("VOUS AVEZ PERDU");
         labelDef.setFont(new Font("Arial", Font.PLAIN, 40));
-        add(labelDef, BorderLayout.SOUTH);
-
+        add(labelDef);
         // TODO retirer btn soumettre mot
+    }
+
+    /**
+     * Affiche le message de succès
+     */
+    private void afficherVictoire() {
+        JLabel labelDef = new JLabel();
+        labelDef.setText("BRAVO, VOUS AVEZ TROUVÉ LE MOT");
+        labelDef.setFont(new Font("Arial", Font.PLAIN, 40));
+        add(labelDef);
+        // TODO retirer btn soumettre mot
+    }
+
+    /**
+     * Affiche le mot lorsque le joueur a perdu
+     */
+    private void afficherMot() {
+        JLabel labelDef = new JLabel();
+        labelDef.setText("Le mot était : "); // TODO ajouter le mot
+        labelDef.setFont(new Font("Arial", Font.PLAIN, 40));
+        add(labelDef);
     }
 
     /**
@@ -155,10 +177,19 @@ public class PenduVue extends JPanel {
         imageLabel.setIcon(imagePendu);
     }
 
-    private void afficherNbLettres(String mot) {
+    protected void afficherNbLettres(String mot) {
         JLabel labelDef = new JLabel();
         labelDef.setText("Nombre de lettres : " + getNbLettres(mot));
-        labelDef.setFont(new Font("Arial", Font.PLAIN, 40));
-        add(labelDef, BorderLayout.SOUTH);
+        labelDef.setFont(new Font("Arial", Font.PLAIN, 20));
+        add(labelDef);
+    }
+
+    /**
+     * Réinitialise la vue de l'interface
+     */
+    public void reinitialiserVue() {
+        //removeAll();
+        setLayout(new FlowLayout());
+        nbVies = 3;
     }
 }

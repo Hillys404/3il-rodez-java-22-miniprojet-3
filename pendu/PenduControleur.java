@@ -32,6 +32,8 @@ public class PenduControleur {
      * Et affichage d'un champ de saisie avec la première lettre du mot
      */
     private void lancerPartie() {
+        vue.reinitialiserVue();
+
         ligne = PenduModel.getLigneAleatoire("mots.txt");
         definition = PenduModel.getDefinition(ligne);
         motTire = PenduModel.getMot(ligne);
@@ -41,13 +43,9 @@ public class PenduControleur {
 
         this.vue.creerBoutonSoumissionMot();
 
-        // Gestion de la difficulte
-        // Si facile : definition et pas de timer
-        // Si difficile : l'inverse
-
-        // Apparition sur l'interface d'un champ de saisie avec la première lettre du mot
-        creationZoneSaisie(motTire);
         creationZoneDefinition(definition);
+        creationZoneNbLettres(motTire);
+        creationZoneSaisie(motTire);
     }
 
     /**
@@ -81,6 +79,6 @@ public class PenduControleur {
      * @param mot mot tiré aléatoirement
      */
     private void creationZoneNbLettres(String mot) {
-
+        vue.afficherNbLettres(mot);
     }
 }
